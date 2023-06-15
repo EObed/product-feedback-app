@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import "./LandingPage.css";
 import img1 from "./images/background-header.png"
+import { Link } from "react-router-dom";
 // import img2 from "./images/bulb-removebg-preview.png"
 
 
@@ -8,8 +9,6 @@ import img1 from "./images/background-header.png"
 
 
 function LandingPage(){
-
-    const [open, setOpen] = useState(false);
 
     
 
@@ -64,35 +63,38 @@ function LandingPage(){
                         <div className="sugg">Suggestions</div>
                     </div>
                     <div className="sorting">
-                            <div className="sort"> <button className="transparent-button" onClick={()=>{setOpen(!open)}}> Sort by: </button></div>
-                            <div className="sort-param">Most upvotes</div>
+                            <div className="sort"> <button className="transparent-button"> Sort by: </button></div>
+                                
+                            <div className="sort-param" id="sort-selected">Most upvotes</div>
                             
-                        </div>  
-
+                    </div>  
+                    <div className="add-feedback-button">
+                        <button className="feedback-btn"><Link to = "/feedback" >+ Add Feedback</Link></button>
+                    </div>
                 </div>
                 <div className="content-land">
                 
                 </div>
             </div>
-            <div className={`sort-menu ${open? 'active' : 'inactive'}`}>
-                                <ul>
-                                    <DropDownItem text = {"Most Upvotes"}/>
-                                    <DropDownItem text = {"Least Upvotes"}/>
-                                    <DropDownItem text = {"Most Comments"}/>
-                                    <DropDownItem text = {"Least Comments"}/>
-                                </ul>
-                </div>
+            <div className="dropdown">
+                <ul className="dropdown-menu">
+                    <li><a >Most Upvotes</a></li>
+                    <li><a >Least Upvotes</a></li>
+                    <li><a >Most Comments</a></li>
+                    <li><a >Least Comments</a></li>
+                </ul>
+            </div>
         </div>
     )
 }
 
-function DropDownItem (props) {
-    return (
-        <li className="drop-list"> 
-            <a>{props.text}</a>
-        </li>
+// function DropDownItem (props) {
+//     return (
+//         <li className="drop-list"> 
+//             <a>{props.text}</a>
+//         </li>
         
-    )
-}
+//     )
+// }
 
 export default LandingPage
