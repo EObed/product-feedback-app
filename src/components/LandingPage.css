@@ -331,9 +331,10 @@
 .feedback-btn{
     background-color: #AD1FEA;
     border-radius: 7px;
-    padding: 12px 15px;
+    padding: 0.6em 0.5em;
+    margin-right: 0.5em;
     color: #FFFFFF;
-    border: none;
+    display: inline-block;
     text-decoration: none;
 }
 
