@@ -1,36 +1,39 @@
-import React, {useState ,useEffect, useRef} from "react";
+import React from "react";
 import "./LandingPage.css";
 import img1 from "./images/background-header.png"
-import { Link } from "react-router-dom";
-import AddFeedbackPage from "./AddFeedbackPage";
+// import { Link } from "react-router-dom";
+// import AddFeedbackPage from "./AddFeedbackPage";
 import { useLocation } from "react-router-dom";
+// import Card from "./Card";
+import DisplayCard from "./DisplayCard";
+import AddFeedBackBar from "./AddFeedBackBar";
 // import img2 from "./images/bulb-removebg-preview.png"
 
 
 
 
 
-function LandingPage(props){
-    const [open, setOpen] = useState(false);
+function LandingPage({ feedbacks, setFeedbacks }){
+//     const [open, setOpen] = useState(false);
  
-  let menuRef = useRef();
+//   let menuRef = useRef();
 
-  useEffect(() => {
-    let handler = (e)=>{
-      if(!menuRef.current.contains(e.target)){
-        setOpen(false);
-        console.log(menuRef.current);
-      }      
-    };
+//   useEffect(() => {
+//     let handler = (e)=>{
+//       if(!menuRef.current.contains(e.target)){
+//         setOpen(false);
+//         console.log(menuRef.current);
+//       }      
+//     };
 
-    document.addEventListener("mousedown", handler);
+//     document.addEventListener("mousedown", handler);
     
 
-    return() =>{
-      document.removeEventListener("mousedown", handler);
-    }
+//     return() =>{
+//       document.removeEventListener("mousedown", handler);
+//     }
    
-  });
+//   });
   
 
     // const getData = (data) =>{
@@ -82,47 +85,8 @@ function LandingPage(props){
                 </div>
             </div>
             <div className="main-content-land">
-                <div className="bar-land">
-                    <div className="bulb">bulb</div>
-                    <div className="suggestions">
-                        <div id="suggestion-count" className="suggestion-count">0</div>
-                        <div className="sugg">Suggestions</div>
-                    </div>
-                    <div className="sorting">
-                            <div className="sort" ref={menuRef}> <button className="transparent-button"  onClick={()=>{setOpen(!open)}}> Sort by: </button></div>    
-                            <div className="sort-param" id="sort-selected">Most upvotes</div>       
-                    </div>  
-                    <div className="add-feedback-button">
-                        <button className="feedback-btn"><Link to = "/feedback" >+ Add Feedback</Link></button>
-                    </div>
-                </div>
-                <div className="content-land">
-                  
-                          <div className="content">
-                             <span className="content-title">{location.state.name}</span>
-                             <p className="content-discription">{location.state.description}</p>
-                             
-                          </div>
-                          <div>
-                            <p className="content-catigories">Catigories:</p>
-                            <p className="content-titles">{location.state.selectedCategory}</p>
-                          </div>
-                          
-                             
-                    
-                    
-                </div>
-            </div>
-            <div className={`dropdown-menu ${open? 'active' : 'inactive'}`}>  
-                <ul className="dropdown-menu">
-                    <div className="dropdown-list">
-                    <DropDownItem text={"Most Upvotes"}/>
-                    <DropDownItem text={"Least Upvotes"}/>
-                    <DropDownItem text={"Most Comments"}/>
-                    <DropDownItem text={"Least Comments"}/>
-                   
-                    </div>
-                </ul>
+                <AddFeedBackBar />
+                <DisplayCard feedbacks={feedbacks} setFeedbacks={setFeedbacks} />
             </div>
             </div>
         

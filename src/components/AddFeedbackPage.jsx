@@ -2,45 +2,26 @@ import React, {useState} from "react";
 import "./AddFeedbackPage.css" 
 import { useNavigate } from "react-router-dom";
 
-const AddFeedbackPage = (props) => {
+const AddFeedbackPage = ({ feedbacks, setFeedbacks }) => {
   const navigate= useNavigate()
     const [name,setName] = useState("");
     const [description,setDescription] = useState("");
-    const [selectedCategory,setSelectedCategory] = useState();
+    const [selectedCategory,setSelectedCategory] = useState("Features");
 
 
    
     const handleSubmit = (e) =>{
          e.preventDefault();
-         console.log(name,description,selectedCategory)
+         if(name.trim().length !== 0 && description.trim().length !== 0){
+             console.log(name,description,selectedCategory)
+             const feedback = { name, description, selectedCategory, votes: 0, comments: [], id: Date.now()}
+             setFeedbacks([...feedbacks, feedback]);
+             navigate('/');
+         }
     }
+
    return (
     <div className="feedback-page">
-        {/* <div className="feedback-box">
-            <div className="feedback-heading">Create New Feedback</div>
-            <div className="feedback1">
-                <div className="feedback1-name">Feedback Title</div>
-                <div className="feedback1-desc">Add a short, descriptive headline</div>
-                <div className="feedback1-input"><input type="text"></input></div>
-            </div>
-            <div className="feedback2">
-                <div className="feedback2-name">Category</div>
-                <div className="feedback2-desc">Choose a category for your feedback</div>
-                <div className="feedback2-form">
-                    <form name="dropForm">
-                        <select name="dropSelect" onchange="{showDropInfo()}">
-                            <option value="P">Feature</option>
-                            <option value="B">UI</option>
-                            <option value="C">UX</option>
-                            <option value="C">Enhancement</option>
-                            <option value="C">Bug</option>
-                        </select>
-                </form>
-                </div>
-            </div>
-            
-        </div> */}
-
         <form onSubmit={handleSubmit} className=" form">
             <h5 className="form-title">Create New Feedback</h5>
             <label >Feedback Title</label>
@@ -58,7 +39,7 @@ const AddFeedbackPage = (props) => {
             <option >Bug</option>
             </select>
 
-            <button type="submit" className="form-button" onClick={()=>navigate('/',{replace:true, state:{name,description,selectedCategory}})}>Submit</button>
+            <button type="submit" className="form-button">Submit</button>
         </form>
     </div>
    ) 
